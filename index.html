@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <title>NodeJS Technical Documentation</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Technical Documentation Page for NodeJS" />
+  <meta name="keywords" content="nodejs, documentation, node, javascript" />
+  <meta name="author" content="Kene Udeh" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <link rel="stylesheet" href="css/main.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="js/script.js"></script>
+</head>
+<body>
+  <i id="toggle" class="fas fa-2x fa-bars"></i>
+  <nav id="navbar">
+  <header>
+    <h1 id="title">NodeJS</h1>
+  </header>
+  <ul>
+    <a class="nav-link" href="#Introduction" rel="internal"><li>Introduction</li></a>
+    <a class="nav-link" href="#Modules" rel="internal"><li>Modules</li></a>
+    <a class="nav-link" href="#HTTP_Module" rel="internal"><li>HTTP Module</li></a>
+    <a class="nav-link" href="#File_System" rel="internal"><li>File System</li></a>
+    <a class="nav-link" href="#URL_Module" rel="internal"><li>URL Module</li></a>
+    <a class="nav-link" href="#NPM" rel="internal"><li>NPM</li></a>
+    <a class="nav-link" href="#Events" rel="internal"><li>Events</li></a>
+  </ul>
+</nav>
+<main id="main-doc">
+  <section class="main-section" id="Introduction">
+    <header class="section-header">
+      Introduction
+    </header>
+    <article>
+      <p>
+        NodeJS is an open source server environment it allows you to run javascript
+        on the server.
+      </p>
+      <p>
+        As an asynchronous event driven JavaScript runtime, Node is designed to
+        build scalable network applications. In the following "hello world" example,
+        many connections can be handled concurrently. Upon each connection the callback
+        is fired, but if there is no work to be done, Node will sleep.
+      </p>
+      <pre>
+        <code class="javascript">
+  const http = require('http');
+
+  const hostname = '127.0.0.1';
+  const port = 3000;
+
+  const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World\n');
+  });
+
+  server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
+      </code>
+      </pre>
+
+      <h4>What can NodeJS do?</h4>
+      <ul>
+  <li>Node.js can generate dynamic page content</li>
+  <li>Node.js can create, open, read, write, delete, and close files on the server</li>
+  <li>Node.js can collect form data</li>
+  <li>Node.js can add, delete, modify data in your database</li>
+</ul>
+    </article>
+  </section>
+  <section class="main-section" id="Modules">
+    <header class="section-header">
+      Modules
+    </header>
+    <article>
+      <p>
+        Consider modules to be the same as JavaScript libraries.
+        A set of functions you want to include in your application.
+      </p><br />
+      <h4>Build-in Modules</h4>
+      <p>
+        Node.js has a set of built-in modules which you can use without any further installation.
+        Look at this <a href="https://www.w3schools.com/nodejs/ref_modules.asp">Built-in Modules Reference</a> for a complete list of modules.
+        You can Include a module as shown in the below code sample. Then you can use it in your own code.
+      </p>
+      <pre>
+        <code class="javascript">
+var http = require('http');
+        </code>
+      </pre>
+      <h4>Create your own modules</h4>
+      <p>
+        You can create your own modules, and easily include them in your applications by
+        using the <code class="codespan">exports</code> keyword to make properties and methods available outside the module file.
+        The following example creates a module that returns a date and time object:
+     </p>
+     <pre>
+       <code class="javascript">
+exports.myDateTime = function () {
+   return Date();
+};
+       </code>
+     </pre>
+     <p></p>
+    </article>
+  </section>
+  <section class="main-section" id="HTTP_Module">
+    <header class="section-header">
+     HTTP Module
+    </header>
+    <article>
+      <p>Node.js has a built-in module called HTTP, which allows Node.js to transfer data over the Hyper Text Transfer Protocol (HTTP).
+         To include the HTTP module, use the <code class="codespan">require()</code> method:
+      </p>
+      <pre>
+        <code class="javascript">
+var http = require('http');
+        </code>
+      </pre>
+      <h4>Node.js as a Web Server</h4>
+      <p>The HTTP module can create an HTTP server that listens to server ports and gives a response back to the client.
+        Use the <code class="codespan">createServer()</code> method to create an HTTP server as shown below.
+        You can then add HTTP header, read the qurery string from the <code class="codespan">req</code> argument etc.
+      </p>
+      <pre>
+        <code>
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(req.url);
+    res.end();
+}).listen(8080);
+        </code>
+      </pre>
+    </article>
+  </section>
+  <section class="main-section" id="File_System">
+    <header class="section-header">
+      File System
+    </header>
+    <article>
+      <p>The Node.js file system module allows you to work with the file system on your computer.
+         To include the File System module, use the <code class="codespan">require()</code> method:
+      </p>
+      <pre>
+        <code class="javascript">
+var fs = require('fs');
+        </code>
+      </pre>
+      <p>Common use for the File System module:</p>
+      <ul>
+        <li>Read files</li>
+        <li>Create files</li>
+        <li>Update files</li>
+        <li>Delete files</li>
+        <li>Rename files</li>
+      </ul><br />
+      <p>The <code class="codespan">fs.readFile()</code> method is used to read files on your computer. As shown below: </p>
+      <pre>
+        <code class="javascript">
+fs.readFile('demofile1.html', function(err, data) {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(data);
+    res.end();
+});
+        </code>
+      </pre>
+
+      <p>The <code class="codespan">fs.appendFile()</code> method is used to append text to files on your computer. As shown below: </p>
+      <pre>
+        <code class="javascript">
+fs.appendFile('mynewfile1.txt', 'Hello content!', function (err) {
+  if (err) throw err;
+  console.log('Saved!');
+});
+        </code>
+      </pre>
+
+      <p>The <code class="codespan">fs.open()</code> method takes a "flag" as the second argument,
+        if the flag is "w" for "writing", the specified file is opened for writing.
+         If the file does not exist, an empty file is created:</p>
+      <pre>
+        <code class="javascript">
+fs.open('mynewfile2.txt', 'w', function (err, file) {
+  if (err) throw err;
+  console.log('Saved!');
+});
+        </code>
+      </pre>
+
+      <p>The <code class="codespan">fs.writeFile()</code> method replaces the specified file
+        and content if it exists. If the file does not exist, a new file, containing the
+        specified content, will be created:</p>
+      <pre>
+        <code class="javascript">
+fs.writeFile('mynewfile3.txt', 'Hello content!', function (err) {
+  if (err) throw err;
+  console.log('Saved!');
+});
+        </code>
+      </pre>
+
+    </article>
+
+  </section>
+  <section class="main-section" id="URL_Module">
+    <header class="section-header">
+      URL Module
+    </header>
+    <article>
+      <p>
+        The URL module splits up a web address into readable parts.
+        To include the URL module, use the <code class="codespan">require()</code> method:
+      </p>
+      <pre>
+        <code class="javascript">
+var url = require('url');
+        </code>
+      </pre>
+      <p>
+        Parse an address with the <code class="codespan">url.parse()</code> method,
+         and it will return a URL object with each part of the address as properties:
+      </p>
+      <pre>
+        <code class="javascript">
+var url = require('url');
+var adr = 'http://localhost:8080/default.htm?year=2017&month=february';
+var q = url.parse(adr, true);
+
+console.log(q.host); //returns 'localhost:8080'
+console.log(q.pathname); //returns '/default.htm'
+console.log(q.search); //returns '?year=2017&month=february'
+
+var qdata = q.query; //returns an object: { year: 2017, month: 'february' }
+console.log(qdata.month); //returns 'february'
+        </code>
+      </pre>
+    </article>
+  </section>
+  <section class="main-section" id="NPM">
+    <header class="section-header">
+      NPM
+    </header>
+    <article>
+      <p>
+        NPM is a package manager for Node.js packages, or modules if you like.
+        <a href="https://www.npmjs.com/">www.npmjs.com</a> hosts thousands of free packages to download and use.
+        The NPM program is installed on your computer when you install Node.js
+      </p><br>
+      <h4>What is a Package?</h4>
+      <p>
+        A package in Node.js contains all the files you need for a module.
+        Modules are JavaScript libraries you can include in your project.
+      </p><br>
+      <h4>Download a Package?</h4>
+      <p>
+        Downloading a package is very easy.
+        Open the command line interface and tell NPM to download the package you want.
+        I want to download a package called "upper-case":
+      </p>
+      <code class="terminalspan">C:\Users\Your Name>npm install upper-case</code><br>
+      <p>
+        Now you have downloaded and installed your first package!
+        NPM creates a folder named "node_modules", where the package
+        will be placed. All packages you install in the future will be placed in this folder.
+        My project now has a folder structure like this:<br>
+        <code class="codespan">C:\Users\My Name\node_modules\upper-case</code>
+      </p>
+    </article>
+  </section>
+  <section class="main-section" id="Events">
+    <header class="section-header">
+      Events
+    </header>
+    <article>
+      <p>Node.js is perfect for event-driven applications.
+        Every action on a computer is an event. Like when a connection is made or a file is opened.
+        Objects in Node.js can fire events, like the readStream object fires events
+        when opening and closing a file:
+      </p>
+      <pre>
+        <code class="javascript">
+var fs = require('fs');
+var rs = fs.createReadStream('./demofile.txt');
+rs.on('open', function () {
+  console.log('The file is open');
+});
+        </code>
+      </pre>
+      <h4>Events Module</h4>
+      <p>
+        Node.js has a built-in module, called "Events", where you can create-, fire-, and listen for- your own events.
+        To include the built-in Events module use the <code class="codespan">require()</code> method. In addition,
+        all event properties and methods are an instance of an EventEmitter object. To be
+        able to access these properties and methods, create an EventEmitter object:
+      </p>
+      <pre>
+        <code class="javascript">
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
+        </code>
+      </pre>
+
+      <h4>The EventEmitter Object</h4>
+      <p>
+        You can assign event handlers to your own events with the EventEmitter object.
+        In the example below we have created a function that will be executed when a "scream" event is fired.
+        To fire an event, use the <code class="codespan">emit()</code> method.
+      </p>
+      <pre>
+        <code class="javascript">
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
+
+//Create an event handler:
+var myEventHandler = function () {
+  console.log('I hear a scream!');
+}
+
+//Assign the event handler to an event:
+eventEmitter.on('scream', myEventHandler);
+
+//Fire the 'scream' event:
+eventEmitter.emit('scream');
+        </code>
+      </pre>
+    </article>
+  </section>
+</main>
+
+</body>
+</html>
